@@ -71,7 +71,7 @@ namespace Repositorio
 
             conexion.Open();
 
-            string query = "UPDATE Personas SET nombre = '" + nombre + "', apellido = '" + apellido + "  WHERE nombre = 'Alberto Sanchez'" + personaId;
+            string query = "UPDATE Personas SET nombre = '" + nombre + "', apellido = '" + apellido + "  WHERE personasId = '" + personaId;
 
             SqlCommand cmd = new SqlCommand(query, conexion);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
