@@ -65,17 +65,17 @@ namespace Repositorio
             return persona;
         }
 
-        public void modificarPersona (int personaId, Persona p)
+        public void ModificarPersona (int personaId, Persona p)
         {
             conexion.ConnectionString = datosConexion;
 
             conexion.Open();
 
-            string query = "UPDATE Personas SET nombre = '" + nombre + "', apellido = '" + apellido + "  WHERE personasId = '" + personaId;
+            string query = "UPDATE Personas SET nombre = '" + p.Nombre + "', apellido = '" + p.Apellido + "', direccion = '" + p.Direccion + "', telefono = '" + p.Telefono + "' WHERE personasId = " + personaId;
 
             SqlCommand cmd = new SqlCommand(query, conexion);
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            da.Fill(persona);
+            cmd.ExecuteNonQuery(); //Si falla, hace rollback
+
             conexion.Close();
         }
 

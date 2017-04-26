@@ -12,10 +12,11 @@ namespace TrabajoPractico
 {
     public partial class ModificarPersona : System.Web.UI.Page
     {
-        PersonasNego personasNego = new PersonasNego(); 
+        PersonasNego personasNego = new PersonasNego();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (IsPostBack) return;
             int personaId = int.Parse(Request["personaId"].ToString());
             llenarCampos(personaId);
         }
@@ -33,10 +34,28 @@ namespace TrabajoPractico
                 txtTelefono.Text = data["telefono"].ToString();
             }
         }
-
+        
         protected void btnModificar_Click(object sender, EventArgs e)
         {
+            int personaId = int.Parse(Request["personaId"].ToString());
+            Persona persona = new Persona();
 
+            try
+            {
+
+                persona.Nombre = txtNombre.Text;
+                persona.Apellido = txtApellido.Text;
+                persona.Direccion = txtDireccion.Text;
+                persona.Telefono = txtTelefono.Text;
+
+                personasNego.ModificarPersona(personaId, persona);
+
+                Response.Redirect("AltaPersona.aspx");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

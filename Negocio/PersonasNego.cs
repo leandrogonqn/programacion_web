@@ -28,5 +28,10 @@ namespace Negocio
             return personasrepo.buscarPersona(personaId);
         }
 
+        public void ModificarPersona(int personaId, Persona p)
+        {
+            personasrepo.ModificarPersona(personaId, p);
+        }
+
     }
 }
