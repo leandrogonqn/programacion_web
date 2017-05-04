@@ -11,18 +11,28 @@ namespace Negocio
 {
     public class TurnosNego
     {
-        TurnosRepo turnorepo = new TurnosRepo();
+        TurnosRepo turnoRepo = new TurnosRepo();
         public void guadarTurnos (Turno turno)
         {
-            turnorepo.guardarTurno(turno);
+            turnoRepo.guardarTurno(turno);
         }
         public DataTable listarTurnos()
         {
-            return turnorepo.listarTurnos();
+            return turnoRepo.listarTurnos();
         }
         public DataTable CargarDropdown()
         {
-            return turnorepo.CargarDropdown();
+            return turnoRepo.CargarDropdown();
+        }
+
+        public DataTable buscarTurnos(int turnosId)
+        {
+            return turnoRepo.buscarTurnos(turnosId);
+        }
+
+        public void modificarTurno(int turnosId, Turno t)
+        {
+            turnoRepo.ModificarTurno(turnosId, t);
         }
     }
 }

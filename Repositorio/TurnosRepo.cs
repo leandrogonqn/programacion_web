@@ -56,7 +56,7 @@ namespace Repositorio
 
             conexion.Open();
 
-            string query = "select personasId, CONVERT(varchar(10), personasId) + ' - ' + nombre + ' ' + apellido as datos from Personas";
+            string query = "select personasId, CONVERT(varchar(10), personasId) + ' - ' + nombre + ' ' + apellido + ' - ' + direccion as datos from Personas WHERE activo = 1";
 
             SqlCommand cmd = new SqlCommand(query, conexion);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -64,6 +64,37 @@ namespace Repositorio
             conexion.Close();
 
             return dt;
+        }
+
+        public DataTable buscarTurnos(int turnosId)
+        {
+            DataTable turnos = new DataTable();
+            conexion.ConnectionString = datosConexion;
+
+            conexion.Open();
+
+            string query = "select * from Turnos WHERE turnosId = " + turnosId;
+
+            SqlCommand cmd = new SqlCommand(query, conexion);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(turnos);
+            conexion.Close();
+
+            return turnos;
+        }
+
+        public void ModificarTurno(int turnoId, Turno t)
+        {
+            conexion.ConnectionString = datosConexion;
+
+            conexion.Open();
+
+            string query = "UPDATE Turnos SET personaId = '" + t.PersonaId + "', fechaTurno = '" + t.FechaTurno + "', motivosTurno = '" + t.MotivoTurno + "', tareas = '" + t.Tareas + "' WHERE turnosId = " + turnoId;
+
+            SqlCommand cmd = new SqlCommand(query, conexion);
+            cmd.ExecuteNonQuery(); //Si falla, hace rollback
+
+            conexion.Close();
         }
 
     }

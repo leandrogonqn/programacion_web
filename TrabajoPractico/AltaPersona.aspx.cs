@@ -43,6 +43,7 @@ namespace TrabajoPractico
                 persona.Apellido = txtApellido.Text;
                 persona.Direccion = txtDireccion.Text;
                 persona.Telefono = txtTelefono.Text;
+                persona.Activo = 1;
 
                 PersonaNego.GuardarPersonas(persona);
 
@@ -52,7 +53,6 @@ namespace TrabajoPractico
                 txtTelefono.Text = String.Empty;
 
                 CargarGrilla();
-
 
             }
             catch (Exception ex)

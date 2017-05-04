@@ -155,6 +155,7 @@
     <Content Include="jquery-migrate-master\test\traversing.js" />
     <Content Include="js\jquery-3.2.1.min.js" />
     <Content Include="ModificarPersona.aspx" />
+    <Content Include="ModificarTurno.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -227,6 +228,13 @@
     </Compile>
     <Compile Include="ModificarPersona.aspx.designer.cs">
       <DependentUpon>ModificarPersona.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarTurno.aspx.cs">
+      <DependentUpon>ModificarTurno.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModificarTurno.aspx.designer.cs">
+      <DependentUpon>ModificarTurno.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site1.Master.cs">

@@ -12,6 +12,7 @@ namespace Dominio
         private String apellido;
         private String direccion;
         private String telefono;
+        private int activo;
 
         public string Nombre
         {
@@ -65,6 +66,18 @@ namespace Dominio
             }
         }
 
+        public int Activo
+        {
+            get
+            {
+                return activo;
+            }
+
+            set
+            {
+                activo = value;
+            }
+        }
     }
 
 }

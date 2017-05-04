@@ -52,7 +52,6 @@
                             <asp:Button ID="Modificar" runat="server" CommandName="Modificar" CommandArgument='<%# Eval("personasId")%>' Text="Modificar" />
                         </ItemTemplate>
                     </asp:TemplateField>
-
                 </Columns>
 
             </asp:GridView>

@@ -1,13 +1,12 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="AltaTurno.aspx.cs" Inherits="TrabajoPractico.AltaTurno" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="ModificarTurno.aspx.cs" Inherits="TrabajoPractico.ModificarTurno" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
     <br />
     <div class="container">
         <div class="panel panel-primary">
-            <div class="panel-heading">Ingrese datos básicos</div>
+            <div class="panel-heading">Ingrese datos a modificar</div>
             <div class="panel-body">
 
                 <div class="form-group">
@@ -32,30 +31,10 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <asp:Button ID="btnGuardar" runat="server" Text="Guardar" class="btn btn-primary" OnClick="btnGuardar_Click" />
+                    <asp:Button ID="btnModificar" runat="server" Text="Modificar" class="btn btn-primary" OnClick="btnModificar_Click"/>
 
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <asp:GridView ID="gdvTurnos" runat="server" CssClass="table table-striped" AutoGenerateColumns="false" OnRowCommand="gdvTurnos_RowCommand">
-
-                <Columns>
-                    <asp:BoundField HeaderText="ID del Turno" DataField="turnosId" />
-                    <asp:BoundField HeaderText="Nombre del Cliente" DataField="nombre" />
-                    <asp:BoundField HeaderText="Apellido del Cliente" DataField="apellido" />
-                    <asp:BoundField HeaderText="Fecha Registro del Turno" DataField="fechaRegistroTurno" />
-                    <asp:BoundField HeaderText="Fecha del Turno" DataField="fechaTurno" />
-                    <asp:BoundField HeaderText="Motivos del Turno" DataField="motivosTurno" />
-                    <asp:BoundField HeaderText="Tareas a realizar" DataField="tareas" />
-                    <asp:TemplateField>
-                        <ItemTemplate>
-                            <asp:Button ID="Modificar" runat="server" CommandName="Modificar" CommandArgument='<%# Eval("turnosId")%>' Text="Modificar" />
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                </Columns>
-
-            </asp:GridView>
         </div>
     </div>
 </asp:Content>

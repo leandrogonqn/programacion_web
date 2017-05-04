@@ -10,52 +10,49 @@ using System.Data;
 
 namespace TrabajoPractico
 {
-    public partial class AltaTurno : System.Web.UI.Page
+    public partial class ModificarTurno : System.Web.UI.Page
     {
         TurnosNego turnosNego = new TurnosNego();
-
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-            CargarGrilla();
-            CargarDropdown();
+            int turnosId = int.Parse(Request["turnosId"].ToString());
+            llenarCampos(turnosId);
         }
 
-        protected void btnGuardar_Click(object sender, EventArgs e)
+        private void llenarCampos(int turnosId)
         {
-            GuardarTurno();
+            DataTable dt = new DataTable();
+            dt = turnosNego.buscarTurnos(turnosId);
+
+            foreach (DataRow data in dt.Rows)
+            {
+                string fmt = "00";
+                DateTime dia = Convert.ToDateTime(data["fechaTurno"].ToString());
+                ddlPersona.SelectedValue = data["personaId"].ToString();
+                dtDiaDelTurno.Value = dia.Year.ToString() + "-" + dia.Month.ToString(fmt) + "-" + dia.Day.ToString(fmt);;
+                dtHoraDelTurno.Value = dia.TimeOfDay.ToString();
+                txtMotivoTurno.Text = data["motivosTurno"].ToString();
+                txtTareas.Text = data["tareas"].ToString();
+            }
         }
 
-        private void CargarGrilla()
+        protected void btnModificar_Click(object sender, EventArgs e)
         {
-            gdvTurnos.DataSource = turnosNego.listarTurnos(); //ESTO CARGA LA GRILLA
-            gdvTurnos.DataBind(); //ESTO CARGA LA GRILLA
-        }
-
-        private void GuardarTurno()
-        {
+            int turnosId = int.Parse(Request["turnosId"].ToString());
             Turno turno = new Turno();
 
             try
             {
                 turno.PersonaId = int.Parse(ddlPersona.SelectedItem.Value);
                 turno.FechaTurno = Convert.ToDateTime(dtDiaDelTurno.Value + " " + (dtHoraDelTurno.Value));
-                turno.RegistroTurno = DateTime.Now;
                 turno.MotivoTurno = txtMotivoTurno.Text;
                 turno.Tareas = txtTareas.Text;
 
-                turnosNego.guadarTurnos(turno);
-                
-                dtDiaDelTurno.Value = String.Empty;
-                dtHoraDelTurno.Value = String.Empty;
-                txtMotivoTurno.Text = String.Empty;
-                txtTareas.Text = String.Empty;
-                
+                turnosNego.modificarTurno(turnosId, turno);
 
-                CargarGrilla();
-
-
+                Response.Redirect("AltaTurno.aspx");
             }
             catch (Exception ex)
             {
@@ -81,16 +78,5 @@ namespace TrabajoPractico
             ddlPersona.DataBind();
             ddlPersona.Items.Insert(0, "Seleccione el cliente para asignarle turno");
         }
-
-        protected void gdvTurnos_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "Modificar")
-            {
-                int turnoId = int.Parse(e.CommandArgument.ToString());
-                string pagina = "ModificarTurno.aspx?turnosId=" + turnoId;
-                Response.Redirect(pagina);
-            }
-        }
-
     }
 }

@@ -20,7 +20,7 @@ namespace Repositorio
             conexion.ConnectionString = datosConexion;
             conexion.Open();
             
-            string qy = "insert into Personas values('" + persona.Nombre + "','" + persona.Apellido + "','" + persona.Direccion + "','" + persona.Telefono + "')";
+            string qy = "insert into Personas values('" + persona.Nombre + "','" + persona.Apellido + "','" + persona.Direccion + "','" + persona.Telefono + "','" + persona.Activo + "')";
 
             SqlCommand cmd = new SqlCommand(qy, conexion);
             cmd.ExecuteNonQuery(); //Si falla, hace rollback
@@ -37,7 +37,7 @@ namespace Repositorio
 
             conexion.Open();
 
-            string query = "select * from Personas";
+            string query = "select * from Personas WHERE activo = 1";
 
             SqlCommand cmd = new SqlCommand(query, conexion);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
